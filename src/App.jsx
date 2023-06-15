@@ -11,8 +11,6 @@ function App() {
         const res = await fetch(`https://dummyjson.com/products?limit=100`);
         const data = await res.json();
 
-        console.log(data);
-
         if (data && data.products) {
             setProducts(data.products);
         }
@@ -20,6 +18,22 @@ function App() {
     useEffect(() => {
         fetchProducts();
     }, []);
+
+    const prevPage = () => {
+        let newPage = page - 1;
+        if (newPage < 1) {
+            newPage = products.length / 10;
+        }
+        setPage(newPage);
+    };
+
+    const nextPage = () => {
+        let newPage = page + 1;
+        if (newPage > products.length / 10) {
+            newPage = 1;
+        }
+        setPage(newPage);
+    };
 
     const selectPageHandler = (selectedPage) => {
         setPage(selectedPage);
@@ -36,13 +50,13 @@ function App() {
             )}
             {products.length > 0 && (
                 <div className="pagination">
-                    <span> Prev</span>
+                    <span onClick={prevPage}> Prev</span>
                     <PageNumber
                         products={products}
                         selectPageHandler={selectPageHandler}
                         page={page}
                     />
-                    <span>Next</span>
+                    <span onClick={nextPage}>Next</span>
                 </div>
             )}
         </div>
