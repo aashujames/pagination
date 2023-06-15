@@ -21,6 +21,10 @@ function App() {
         fetchProducts();
     }, []);
 
+    const selectPageHandler = (selectedPage) => {
+        setPage(selectedPage);
+    };
+
     return (
         <div>
             {products.length > 0 && (
@@ -33,7 +37,11 @@ function App() {
             {products.length > 0 && (
                 <div className="pagination">
                     <span> Prev</span>
-                    <PageNumber products={products} />
+                    <PageNumber
+                        products={products}
+                        selectPageHandler={selectPageHandler}
+                        page={page}
+                    />
                     <span>Next</span>
                 </div>
             )}

@@ -3,3 +3,7 @@ span {
     border: 1px solid gray;
     cursor: pointer;
 }
+
+.pagination__selected {
+    background-color: rgb(220, 220, 220);
+}
